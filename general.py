@@ -5,23 +5,19 @@ def i_to_chr(i):
     return i
 
 #translating the recieved signal back to string
-def save_char_list_to_file(characters_list, data,  counter, path):
-    temp_str = '' 
-    for i in characters_list: 
-        j = i_to_chr(i)
-        temp_str += chr(j)
-
+def save_char_list_to_file(original_string, noised_string,  counter, path):
     with open("./" + path + "/" + str(counter)+'.txt', 'w') as file:
-            file.write(temp_str)
-            file.write("\n\n\noriginal string:\n")
-            file.write("----------------\n")                
-            file.write(data)
+            file.write("original string:\n")
+            file.write(original_string)
+                       
+            file.write("\nnoised string:\n")
+            file.write(noised_string)
 
 #drawing histogram function
 def draw_dynamically(acumulated_char_list, plt, fig, counter, path):
     plt.hist(acumulated_char_list, bins = 36)
     plt.xlim(0, 35)
-    plt.ylim(0, sum(acumulated_char_list)/180)
+    plt.ylim(0, sum(acumulated_char_list)/200)
     plt.draw()  
     plt.pause(0.05)
     

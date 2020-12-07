@@ -18,26 +18,27 @@ def client_program():
     client_socket.connect((host, port))  # connect to the server
 
     message = "void"
-    acumulated_char_list = [0 in range(36)]
+    acumulated_char_list = [0 in range(36)] #for drawing accumulative histogram
     fig = plt.figure()
+    # plt.bar(x=['NB', 'SVM', 'MaxEnt'],
+    #     height=[Accuracy_of_NB, Accuracy_of_SVM, Accuracy_of_MaxEnt],
+    #     color=['limegreen', 'dodgerblue', 'crimson'])
 
     #recieving/sending:
     counter = 0 #will be used for unique filenames
     while message.lower().strip() != 'quit':
         counter += 1
         client_socket.send(message.encode())  # send message
-        data = client_socket.recv(1024).decode()  # receive response
+        recieved_string = client_socket.recv(1024).decode()  # receive response
         
-        if data == 'eof':  #'eof' will be sent from server when work is done
+        if recieved_string == 'eof':  #'eof' will be sent from server when work is done
             message = 'quit'
             continue
 
-        #creating noisy input from recieved data, and saving to file
-        characters_list = create_characters_list(data)
-        generate_noise(characters_list, "config_files/"+ noise_type+ ".csv")
-        save_char_list_to_file(characters_list, data, counter, path)
-        
-        acumulated_char_list += characters_list
+        noised_string = generate_noise(recieved_string, "config_files/"+ noise_type + ".csv")
+        save_char_list_to_file(recieved_string, noised_string, counter, path)
+        noised_int_list = create_characters_list(noised_string)
+        acumulated_char_list += noised_int_list
         draw_dynamically(acumulated_char_list, plt, fig, counter, path)
         
     client_socket.close()  # close the connection

@@ -4,24 +4,29 @@ import pandas as pd
 from numpy import random
 from create_rand import *
 
-def generate_noise(my_rep_list, path_to_conf):
+def generate_noise(my_string, path_to_conf):
     file = open(path_to_conf)
-    data = pd.read_csv(file)
-    size = len(my_rep_list)
-    
-    for rep_index in range(size):        
-        rand_val = random.randint(10000) / 100
-        current_probabilities_row = data.iloc[my_rep_list[rep_index]]
-
-        #check if we need to change the character according to probabilities:
-        if rand_val <= 100: 
-            for replacing_idx in range(1, 37):
-                if current_probabilities_row[replacing_idx] < rand_val:       
-                    continue
-                else:
-                    my_rep_list[rep_index] = replacing_idx - 1
-                    break
+    chars_list = pd.read_csv(file, index_col = "CHAR", nrows = 0).columns
     file.close()
 
+    file = open(path_to_conf)
+    data = pd.read_csv(file, index_col = "CHAR")
+    file.close()
 
+    out_string = ''
+    
+    for index in range(len(my_string)):     #index is for my_string    
+        current_probabilities_row = data.loc[my_string[index]]
+        #make choice to replace char or not
+        rand_val = random.randint(10000) / 100
+        if rand_val <= 100: 
+            for replacing_idx in range(36): #replacing_idx is for the prob. 
+                
+                if rand_val <= current_probabilities_row[replacing_idx]:   
+                    out_string += chars_list[replacing_idx]
+                    break
+        if replacing_idx == 35:
+            out_string += my_string[index]
 
+    return out_string            
+    
