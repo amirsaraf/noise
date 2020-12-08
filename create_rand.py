@@ -14,6 +14,11 @@ def create_file_of_random_chars(size):
 
 #create a list of indexes 0-35 representing the chars 
 def create_characters_list(string_input):
+    """
+    the function converts a string to list of ints:
+    0-9: values will get converted to 0-9
+    A-Z: values will get converted to 10-35
+    """
     out_int_list = []
     size = len(string_input)
  

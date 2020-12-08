@@ -5,7 +5,7 @@ import csv
 from general import *
 
 def create_drift_noise(filename):
-    """creates right-drift config file"""
+    """creates right-drift csv config file"""
     file =  open(filename, 'w', newline='')
     writer = csv.writer(file)
     noise_level = int(input("choose noise level (1-100):"))

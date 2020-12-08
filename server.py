@@ -4,6 +4,12 @@ import time
 from create_rand import create_file_of_random_chars
 
 def server_program():
+    """
+    server side: 
+    1. creates a random 100K chars string
+    2. sending the string by chunks of 100 chars
+    3. when all data has been read, it sends 'eof' to the client
+    """
     create_file_of_random_chars(100_000)
     
     host = socket.gethostname()# get the hostname

@@ -5,6 +5,8 @@ from numpy import random
 from create_rand import *
 
 def generate_noise(my_string, path_to_conf):
+    """the function genertes noise to input string, using a given path to 
+    config file"""
     file = open(path_to_conf)
     chars_list = pd.read_csv(file, index_col = "CHAR", nrows = 0).columns
     file.close()

@@ -4,6 +4,7 @@ import csv
 from general import *
 
 def create_random_noise(filename):
+    """creates random probability matrix in a csv file"""
     noise_level = int(input("choose noise level (1-100):"))
     
     file =  open(filename, 'w', newline='')

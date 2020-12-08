@@ -4,7 +4,7 @@ import csv
 from general import *
  
 def create_normal_dist(filename):
-    """creates gaussian probability matrix"""
+    """creates gaussian probability matrix in a csv file"""
     noise_level = int(input("choose noise level (1-100):"))
     data = np.random.randn(100)
     values, base = np.histogram(data, bins=36) 
