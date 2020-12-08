@@ -1,5 +1,5 @@
 before running the program:
-1. create a folder on your current path to store the configuration files: ./config_files
+1. make sure the folder ./config_files was created inside your current path
 2. run gaussian_noise.py/drift_noise.py/random_noise.py to create automatically noise csv files (gauss.csv / drift.csv / random.csv)
 
 run in terminal:
