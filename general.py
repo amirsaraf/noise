@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from collections import Counter
 
 NUM_OF_CHARS = 36
 
@@ -27,15 +28,15 @@ def save_string_to_file(original_string, noised_string, counter, path):
 def draw_dynamically(acumulated_char_list, fig, counter, path):
     """dynamic drawing function. 
     the function also saves plot to files (once in 20 iterations)"""
-    plt.hist(acumulated_char_list, bins = NUM_OF_CHARS)
-    plt.xlim(0, (NUM_OF_CHARS - 1))
-    plt.ylim(0, sum(acumulated_char_list)/200)
-    plt.draw()  
-    plt.pause(0.05)
+    
+    letter_counts = Counter(acumulated_char_list)
+    plt.bar(letter_counts.keys(), letter_counts.values())
+    plt.draw()
     
     if (not counter % 20):
         fig.savefig("./" + path + "/" + str(counter) + '.png')
     
+    plt.pause(0.1)
     fig.clear()
     
     

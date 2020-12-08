@@ -30,7 +30,7 @@ def client_program():
     client_socket.connect((host, port))  # connect to the server
 
     message = "void"
-    acumulated_char_list = [0 in range(NUM_OF_CHARS)] #for drawing accumulative histogram
+    acumulated_char_list = [chr(i_to_chr(i)) for i in range(NUM_OF_CHARS)] #for drawing accumulative histogram
     fig = plt.figure()
 
     #recieving/sending:
@@ -43,11 +43,11 @@ def client_program():
         if recieved_string == 'eof':  #'eof' will be sent from server when work is done
             message = 'quit'
             continue
-
+       
         noised_string = generate_noise(recieved_string, "config_files/"+ noise_type + ".csv")
         save_string_to_file(recieved_string, noised_string, counter, path)
-        noised_int_list = create_characters_list(noised_string)
-        acumulated_char_list += noised_int_list
+        noised_list_of_chars = list(noised_string)
+        acumulated_char_list += noised_list_of_chars
         draw_dynamically(acumulated_char_list, fig, counter, path)
         
     client_socket.close()  # close the connection
