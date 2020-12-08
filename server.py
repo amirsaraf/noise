@@ -28,11 +28,11 @@ def server_program():
         if not data:
             break  # if data is not received break
         
-        s = in_file.read(100) 
+        chunk = in_file.read(100) 
         
-        if (s == b''):
-            s = b'eof'
-        conn.send(s) 
+        if (chunk == b''):
+            chunk = b'eof'
+        conn.send(chunk) 
 
     conn.close()  
     in_file.close()

@@ -6,6 +6,8 @@ from create_rand import *
 from generate_noise import *
 from general import *
 
+NUM_OF_CHARS = 36
+
 def client_program():
     """
     the function gets chunks of 100 chars from server. then it:
@@ -28,7 +30,7 @@ def client_program():
     client_socket.connect((host, port))  # connect to the server
 
     message = "void"
-    acumulated_char_list = [0 in range(36)] #for drawing accumulative histogram
+    acumulated_char_list = [0 in range(NUM_OF_CHARS)] #for drawing accumulative histogram
     fig = plt.figure()
 
     #recieving/sending:
@@ -46,7 +48,7 @@ def client_program():
         save_string_to_file(recieved_string, noised_string, counter, path)
         noised_int_list = create_characters_list(noised_string)
         acumulated_char_list += noised_int_list
-        draw_dynamically(acumulated_char_list, plt, fig, counter, path)
+        draw_dynamically(acumulated_char_list, fig, counter, path)
         
     client_socket.close()  # close the connection
 

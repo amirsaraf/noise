@@ -4,6 +4,8 @@ import pandas as pd
 from numpy import random
 from create_rand import *
 
+NUM_OF_CHARS = 36
+
 def generate_noise(my_string, path_to_conf):
     """the function genertes noise to input string, using a given path to 
     config file"""
@@ -22,7 +24,7 @@ def generate_noise(my_string, path_to_conf):
         #make choice to replace char or not
         rand_val = random.randint(10000) / 100
         if rand_val <= 100: 
-            for replacing_idx in range(36): #replacing_idx is for the prob. 
+            for replacing_idx in range(NUM_OF_CHARS): #replacing_idx is for the prob. 
                 
                 if rand_val <= current_probabilities_row[replacing_idx]:   
                     out_string += chars_list[replacing_idx]

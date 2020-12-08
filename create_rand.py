@@ -3,12 +3,14 @@ import string
 import pandas as pd
 from general import *
 
+NUM_OF_CHARS = 36
+
 #create file random chars
 def create_file_of_random_chars(size):
     with open("random_string.txt", "w") as file:
 
         for x in range(size):
-            y = random.randint(36) 
+            y = random.randint(NUM_OF_CHARS) 
             y = i_to_chr(y)
             file.write(chr(y))
 

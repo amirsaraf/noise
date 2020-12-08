@@ -1,3 +1,7 @@
+import matplotlib.pyplot as plt
+
+NUM_OF_CHARS = 36
+
 def i_to_chr(i):
     """
     the function converts an int to a desired ascii value:
@@ -20,11 +24,11 @@ def save_string_to_file(original_string, noised_string, counter, path):
             file.write(noised_string)
 
 #drawing histogram function
-def draw_dynamically(acumulated_char_list, plt, fig, counter, path):
+def draw_dynamically(acumulated_char_list, fig, counter, path):
     """dynamic drawing function. 
     the function also saves plot to files (once in 20 iterations)"""
-    plt.hist(acumulated_char_list, bins = 36)
-    plt.xlim(0, 35)
+    plt.hist(acumulated_char_list, bins = NUM_OF_CHARS)
+    plt.xlim(0, (NUM_OF_CHARS - 1))
     plt.ylim(0, sum(acumulated_char_list)/200)
     plt.draw()  
     plt.pause(0.05)
