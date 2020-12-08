@@ -4,28 +4,25 @@ import csv
 from general import *
  
 def create_normal_dist(filename):
-    data = np.random.randn(1000)
+    """creates gaussian probability matrix"""
+    noise_level = int(input("choose noise level (1-100):"))
+    data = np.random.randn(100)
     values, base = np.histogram(data, bins=36) 
-    noise_level = input("choose noise level (1-100):")
-    cumulative = np.cumsum(values)/1000
-    cumulative = cumulative * int(noise_level)
+    
+    cumulative = noise_level * np.cumsum(values) / 100
        
-    with open(filename, 'w', newline='') as file:
-        writer = csv.writer(file)
-        header = []
-        header.append('CHAR')
+    file = open(filename, 'w', newline='')
+    writer = csv.writer(file)
 
-        for i in range(36):
-            i = i_to_chr(i)
-            header.append(chr(i))
-        writer.writerow(header)
+    #create header values:  
+    header = [chr(i_to_chr(i)) for i in range(36)]
+    writer.writerow(np.append(np.array("CHAR"), header))
 
-        for i in range(36):
-            i = i_to_chr(i)
-            cumu_new = np.array(chr(i))
-            new_arr = np.append(cumu_new, cumulative)
-            writer.writerow(new_arr)
-        file.close()
+    #create additional 36 rows
+    for i in range(36):
+        writer.writerow(np.append(np.array(chr(i_to_chr(i))), cumulative))
+
+    file.close()
 
 if __name__ == '__main__':
     create_normal_dist("config_files/gauss.csv")

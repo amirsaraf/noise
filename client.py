@@ -20,9 +20,6 @@ def client_program():
     message = "void"
     acumulated_char_list = [0 in range(36)] #for drawing accumulative histogram
     fig = plt.figure()
-    # plt.bar(x=['NB', 'SVM', 'MaxEnt'],
-    #     height=[Accuracy_of_NB, Accuracy_of_SVM, Accuracy_of_MaxEnt],
-    #     color=['limegreen', 'dodgerblue', 'crimson'])
 
     #recieving/sending:
     counter = 0 #will be used for unique filenames
